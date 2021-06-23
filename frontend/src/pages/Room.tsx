@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { Button } from '../components/Button'
@@ -14,11 +14,34 @@ type RoomParams = {
   id: string
 }
 
+type Question = {
+  id: string,
+  author: {
+    name: string
+    avatar: string
+  }
+  content: string
+  isAnswered: boolean
+  isHighLighted: boolean
+}
+
+type FirebaseQuestions = Record<string, {
+  author: {
+    name: string
+    avatar: string
+  }
+  content: string
+  isAnswered: boolean
+  isHighLighted: boolean
+}>
+
 export function Room() {
   const params = useParams<RoomParams>()
-  const [newQuestion, setNewQuestion] = useState('');
   const { user } = useAuth()
   const roomId = params.id
+  const [newQuestion, setNewQuestion] = useState('');
+  const [questions, setQuestions] = useState<Question[]>([])
+  const [title, setTitle] = useState('')
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault()
@@ -46,6 +69,28 @@ export function Room() {
     setNewQuestion('')
   }
 
+  useEffect(() => {
+    const roomRef = database.ref(`rooms/${roomId}`)
+
+    roomRef.on('value', room => {
+      const databaseRoom = room.val()
+      const firebaseQuestion: FirebaseQuestions = databaseRoom.questions ?? {}
+
+      const parsedQuestions = Object.entries(firebaseQuestion).map(([key, value]) => {
+        return {
+          id: key,
+          content: value.content,
+          author: value.author,
+          isHighLighted: value.isHighLighted,
+          isAnswered: value.isAnswered,
+        }
+      })
+
+      setTitle(databaseRoom.title)
+      setQuestions(parsedQuestions)
+    })
+  }, [roomId])
+
   return (
     <div id="page-room">
       <header>
@@ -57,8 +102,10 @@ export function Room() {
 
       <main>
         <div className="room-title">
-          <h1>Sala React</h1>
-          <span>4 perguntas</span>
+          <h1>Sala {title}</h1>
+          { questions.length === 1 && <span>{questions.length} pergunta</span>}
+          { questions.length > 1 && <span>{questions.length} perguntas</span>}
+          
         </div>
 
         <form onSubmit={handleSendQuestion}>
