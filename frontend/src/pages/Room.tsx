@@ -100,7 +100,7 @@ export function Room() {
         </form>
 
         <div className="question-list">
-          {questions.length > 1 && questions.map(question => {
+          {questions.length > 0 && questions.map(question => {
             return (
               <Question
                 key={question.id}
