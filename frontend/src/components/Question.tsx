@@ -1,16 +1,17 @@
-
+import { ReactNode } from 'react'
 
 import '../styles/question.scss'
 
 type QuestionProps = {
-  content: string
   author: {
     name: string
     avatar: string
   }
+  children?: ReactNode
+  content: string
 }
 
-export function Question({author, content}: QuestionProps) {
+export function Question({author, children, content}: QuestionProps) {
   return(
     <div className="question">
       <p>{content}</p>
@@ -20,7 +21,7 @@ export function Question({author, content}: QuestionProps) {
           <span>{author.name}</span>
         </div>
 
-        <div></div>
+        <div>{children}</div>
       </footer>
     </div>
   )
