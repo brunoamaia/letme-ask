@@ -2,14 +2,16 @@ import { useHistory, useParams } from 'react-router-dom'
 
 import { Button } from '../components/Button'
 import { RoomCode } from '../components/RoomCode'
+import { Question } from '../components/Question'
+import { useRoom } from '../hooks/useRoom'
+import { database } from '../services/firebase'
 
+import answerImg from '../assets/images/answer.svg'
+import checkImg from '../assets/images/check.svg'
 import deleteImg from '../assets/images/delete.svg'
 import logoImg from '../assets/images/logo.svg'
 
 import '../styles/room.scss'
-import { Question } from '../components/Question'
-import { useRoom } from '../hooks/useRoom'
-import { database } from '../services/firebase'
 
 type RoomParams = {
   id: string
@@ -34,6 +36,19 @@ export function AdminRoom() {
       await database.ref(`rooms/${roomId}/questions/${questionId}`).remove()
     }
   }
+
+  async function handleCheckQuestionAsAnswered(questionId: string) {
+    await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
+      isAnswered: true,
+    })
+  }
+
+  async function handleHighlightQuestion(questionId: string) {
+    await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
+      isHighLighted: true
+    })
+  }
+
 
   return (
     <div id="page-room">
@@ -62,7 +77,27 @@ export function AdminRoom() {
                 key={question.id}
                 author={question.author}
                 content={question.content}
+                isAnswered={question.isAnswered}
+                isHighLighted={question.isHighLighted}
               >
+                {!question.isAnswered && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => handleCheckQuestionAsAnswered(question.id)}
+                    >
+                      <img src={checkImg} alt="Marcar pergunta como respondida" />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => handleHighlightQuestion(question.id)}
+                    >
+                      <img src={answerImg} alt="Dar destaque à pergunta" />
+                    </button>
+                  </>
+                )}
+
                 <button
                   type="button"
                   onClick={() => handleDeleteQuestion(question.id)}
