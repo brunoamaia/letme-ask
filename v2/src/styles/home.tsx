@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HomseStyle = styled.div`
+export const HomeStyle = styled.div`
   display: flex;
   align-items: stretch;
   height: 100vh;
