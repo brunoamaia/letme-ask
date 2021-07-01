@@ -1,19 +1,16 @@
-import Image from 'next/image'
-import { useRouter } from 'next/router'
+import React from 'react';
 
-import logoImg from '../../../public/icons/logo.svg'
+import { LogoHeader } from '../../../components/LogoHeader'
 
-import { RoomStyle } from '../../styles/rooms'
+import { RoomStyle } from '../../../styles/rooms'
+// -McsnLsyGKuOisNo1gfC
 
 export default function Room() {
-  const router = useRouter();
   return (
     <RoomStyle>
       <header>
         <div className="content">
-          <div className="logo">
-            <Image src={logoImg} alt="Let me ask" onClick={() => { router.push('/') }} />
-          </div>
+          <LogoHeader />
           <button>-McsnLsyGKuOisNo1gfC</button>
           {/* <RoomCode code={roomId} /> */}
         </div>
@@ -21,7 +18,7 @@ export default function Room() {
 
       <main>
         <div className="room-title">
-          <h1>Sala</h1>
+          <h1>Sala </h1>
           {/* <h1>Sala {title}</h1>
           {questions.length === 1 && <span>{questions.length} pergunta</span>}
           {questions.length > 1 && <span>{questions.length} perguntas</span>} */}
