@@ -4,11 +4,23 @@ import { useRouter } from 'next/router'
 import illustrationImg from '../../public/icons/illustration.svg'
 import logoImg from '../../public/icons/logo.svg'
 import googleIconImg from '../../public/icons/google-icon.svg'
+import { useAuth } from '../hooks/useAuth'
 
 import { HomeStyle } from '../styles/home'
 
 export default function Home() {
   const router = useRouter();
+  
+  const { signInWithGoogle, user , } = useAuth()
+  async function handleCreateRoom() {
+    console.log(user)
+    if (!user) {
+      await signInWithGoogle()
+    }
+
+    router.push('./rooms/new')
+  }
+  
   return (
     <HomeStyle>
       <aside>
@@ -20,7 +32,7 @@ export default function Home() {
       <main>
         <div className="main-content">
           <Image src={logoImg} alt="Let me ask" />
-          <button className="create-room" onClick={() => router.push(`./rooms`)}>
+          <button className="create-room" onClick={handleCreateRoom} /* onClick={() => router.push('./rooms')} */>
             <Image src={googleIconImg} alt="Logo do Google" />
             Crie sua sala com o Google
           </button>

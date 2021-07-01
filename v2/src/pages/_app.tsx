@@ -3,6 +3,8 @@ import Head from 'next/head';
 import { AppProps } from 'next/app'
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
+import { AuthContextProvider } from '../contexts/AuthContext'
+
 import colors from '../styles/theme.json'
 
 const themes = colors
@@ -57,8 +59,10 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
 
       <ThemeProvider theme={themes}>
-        <GlobalStyle />
-        <Component {...pageProps} />
+        <AuthContextProvider>
+          <GlobalStyle />
+          <Component {...pageProps} />
+        </AuthContextProvider>
       </ThemeProvider>
     </>
   );
