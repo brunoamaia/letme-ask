@@ -1,10 +1,12 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
-import illustrationImg from '../../public/icons/illustration.svg'
-import logoImg from '../../public/icons/logo.svg'
-import googleIconImg from '../../public/icons/google-icon.svg'
 import { useAuth } from '../hooks/useAuth'
+import {Button} from '../components/Button'
+
+import illustrationImg from '../images/icons/illustration.svg'
+import googleIconImg from '../images/icons/google-icon.svg'
+import logoImg from '../images/icons/logo.svg'
 
 import { HomeStyle } from '../styles/home'
 
@@ -13,7 +15,6 @@ export default function Home() {
   
   const { signInWithGoogle, user , } = useAuth()
   async function handleCreateRoom() {
-    console.log(user)
     if (!user) {
       await signInWithGoogle()
     }
@@ -45,9 +46,9 @@ export default function Home() {
               placeholder="Digite o código da sala"
             />
 
-            <button type="submit">
+            <Button type="submit">
               Entrar na sala
-            </button>
+            </Button>
 
           </form>
         </div>
