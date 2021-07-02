@@ -61,18 +61,39 @@ export const HomeStyle = styled.div`
     }
 
     form {
+      position: relative;
       input {
         height: 50px;
         border-radius: 8px;
         padding: 0 16px;
+        width: 100%;
+        
         background-color: ${({ theme }) => theme.light.bgForm};
         border: 1px solid ${({ theme }) => theme.light.txtBodyPrimary};
-        width: 100%;
+      }
+      input.open {
+        padding: 0 25% 0 16px;
       }
 
       button {
-        margin-top: 16px;
-        width: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        
+        min-width: 50px;
+        width: 20%;
+        height: 50px;
+        border: none;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        background-color: ${({ theme }) => theme.light.btnBgSecondary};
+        transition: background-color 0.5s ease;
+        cursor: pointer;
+        z-index: -1;
+      }
+      button.open {
+        background-color: ${({ theme }) => theme.light.bgSecondary};
+        z-index: 0;
       }
     }
 
@@ -84,6 +105,16 @@ export const HomeStyle = styled.div`
       a {
         color: ${({ theme }) => theme.light.txtLink};
       }
+    }
+
+    .topics-container {
+      display: flex;
+      align-items: center;
+      justify-content: stretch;
+      margin: 20px auto 0;
+      width: 100%;
+
+      background-color: ${({ theme }) => theme.light.bgForm};
     }
   }
 

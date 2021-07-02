@@ -7,6 +7,11 @@
     "bgQuestionFavorited": "#F4F0FF",
     "bgQuestionAnswered": "#DBDCDD",
 
+    "borderBgPrimary": "#131517",
+    "borderBgTird": "#BFBFBF",
+    "borderBgSecondary": "#FAFAFA",
+
+
     "btnBgGoogle": "#EA4335",
     "btnBgPrimary": "#835AFD",
     "btnBgSecondary": "transparent",
