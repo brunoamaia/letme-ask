@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { database } from "../services/firebase"
 import { useAuth } from "./useAuth"
 
-type QuestionProps = {
+interface QuestionProps {
   author: {
     name: string
     avatar: string
@@ -31,7 +31,7 @@ type FirebaseQuestions = Record<string, {
 
 export function useRoom(roomId: string) {
   const { user } = useAuth()
-  const [questions, setQuestions] = useState<QuestionProps[]>([])
+  const [questions, setQuestions] = useState<QuestionProps[] | null>(null)
   const [title, setTitle] = useState('')
 
   useEffect(() => {
@@ -39,22 +39,28 @@ export function useRoom(roomId: string) {
 
     roomRef.on('value', room => {
       const databaseRoom = room.val()
-      const firebaseQuestion: FirebaseQuestions = databaseRoom.questions ?? {}
 
-      const parsedQuestions = Object.entries(firebaseQuestion).map(([key, value]) => {
-        return {
-          id: key,
-          content: value.content,
-          author: value.author,
-          isHighLighted: value.isHighLighted,
-          isAnswered: value.isAnswered,
-          likeCount: Object.values(value.likes ?? {}).length,
-          likeId: Object.entries(value.likes ?? {}).find(([, like]) => like.authorId === user?.id)?.[0]
-        }
-      })
-
-      setTitle(databaseRoom.title)
-      setQuestions(parsedQuestions)
+      if (databaseRoom == null) {
+        setTitle('Sala inválida')
+        setQuestions(null)
+      } else {
+        const firebaseQuestion: FirebaseQuestions = databaseRoom.questions ?? {}
+  
+        const parsedQuestions = Object.entries(firebaseQuestion).map(([key, value]) => {
+          return {
+            id: key,
+            content: value.content,
+            author: value.author,
+            isHighLighted: value.isHighLighted,
+            isAnswered: value.isAnswered,
+            likeCount: Object.values(value.likes ?? {}).length,
+            likeId: Object.entries(value.likes ?? {}).find(([, like]) => like.authorId === user?.id)?.[0]
+          }
+        })
+  
+        setTitle(databaseRoom.title)
+        setQuestions(parsedQuestions)
+      }
     })
 
     return() => {
