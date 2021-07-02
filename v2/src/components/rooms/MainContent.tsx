@@ -1,8 +1,7 @@
-import { FormEvent, useState } from "react"
 import { useAuth } from "../../hooks/useAuth"
 import { database } from "../../services/firebase"
 
-import { Button } from '../../components/Button'
+import { NewQuestion } from '../../components/rooms/NewQuestion'
 import { Question } from '../../components/Question'
 
 interface MainContentProps {
@@ -24,32 +23,6 @@ interface MainContentProps {
 
 export function MainContent({ questions, roomId, title }: MainContentProps) {
   const { user } = useAuth()
-  const [newQuestion, setNewQuestion] = useState('');
-
-  async function handleSendQuestion(event: FormEvent) {
-    event.preventDefault()
-
-    if (newQuestion.trim() === '') {
-      return
-    }
-
-    if (!user) {
-      throw new Error('You must be logged in')
-    }
-
-    const question = {
-      content: newQuestion,
-      author: {
-        name: user.name,
-        avatar: user.avatar
-      },
-      isHighLighted: false,
-      isAnswered: false
-    }
-
-    await database.ref(`rooms/${roomId}/questions`).push(question)
-    setNewQuestion('')
-  }
 
   async function handleLikeQuestion(questionId: string, likeId: string | undefined) {
     const route = `rooms/${roomId}/questions/${questionId}/likes`
@@ -71,28 +44,7 @@ export function MainContent({ questions, roomId, title }: MainContentProps) {
 
       </div>
 
-      <form onSubmit={handleSendQuestion}>
-        <textarea
-          placeholder="o que você quer perguntar?"
-          onChange={event => setNewQuestion(event.target.value)}
-          value={newQuestion}
-        />
-
-        <div className="form-footer">
-          {user ? (
-            <div className="user-info">
-              <img src={user.avatar} alt={user.avatar} />
-              <span>{user.name}</span>
-            </div>
-          ) : (
-            <span>Para enviar uma pergunta,
-              <button> faça seu login</button>.
-            </span>
-
-          )}
-          <Button type="submit" disabled={!user}>Enviar pergunta</Button>
-        </div>
-      </form>
+      <NewQuestion roomId={roomId} user={user} />
 
       <div className="question-list">
         {questions.length > 0 && questions.map(question => {
