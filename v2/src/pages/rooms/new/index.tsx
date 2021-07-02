@@ -1,88 +1,78 @@
-import React from 'react';
+import React, { FormEvent, useState } from 'react';
+import { useRouter } from 'next/router';
+import Image from 'next/image'
 
-import { LogoHeader } from '../../../components/LogoHeader'
+import { Button } from '../../../components/Button';
+import { useAuth } from '../../../hooks/useAuth';
+import { database } from '../../../services/firebase';
 
-import { RoomStyle } from '../../../styles/rooms'
-// -McsnLsyGKuOisNo1gfC
+import illustrationImg from '../../../images/icons/illustration.svg'
+import logoImg from '../../../images/icons/logo.svg'
 
-export default function Room() {
+import { HomeStyle } from '../../../styles/home'
+
+export default function NewRoom() {
+  const { user } = useAuth()
+
+  const [newRoom, setNewRoom] = useState('')
+
+  const router = useRouter()
+
+  async function handleCreateRoom(event: FormEvent) {
+    event.preventDefault()
+
+    if (newRoom.trim() === '') {
+      return
+    }
+
+    sessionStorage.removeItem('DATA_TOPICS_FIREBASE')
+    const roomRef = database.ref('rooms')
+    const firebaseRoom = await roomRef.push({
+      title: newRoom,
+      authorId: user?.id
+    })
+
+    router.push(`/rooms/${firebaseRoom.key}`)
+  }
+
   return (
-    <RoomStyle>
-      <header>
-        <div className="content">
-          <LogoHeader />
-          <button>-McsnLsyGKuOisNo1gfC</button>
-          {/* <RoomCode code={roomId} /> */}
-        </div>
-      </header>
+    <HomeStyle id="page-auth">
+      <aside>
+        <Image 
+          src={illustrationImg} 
+          alt="Ilustração simbolizando perguntas e respostas"
+        />
+        <strong>Crie salas de Q&amp;A ao-vivo</strong>
+        <p>Tire as dpuvidas sa sua audiência em tempo-real</p>
+      </aside>
 
       <main>
-        <div className="room-title">
-          <h1>Sala </h1>
-          {/* <h1>Sala {title}</h1>
-          {questions.length === 1 && <span>{questions.length} pergunta</span>}
-          {questions.length > 1 && <span>{questions.length} perguntas</span>} */}
-
-        </div>
-
-        <form /* onSubmit={handleSendQuestion} */>
-          <textarea
-            placeholder="o que você quer perguntar?"
+        <div className="main-content">
+          <Image 
+            src={logoImg} 
+            alt="Let me ask" 
+            className="link-home"
+            onClick={() => router.push('/')}
           />
+          <h2>Criar um novo tópico</h2>
+          <form onSubmit={handleCreateRoom}>
+            <input
+              type="text"
+              placeholder="Nome da sala"
+              onChange={event => setNewRoom(event.target.value)}
+            />
 
-          <div className="form-footer">
-            <span>Para enviar uma pergunta,
-              <button> faça seu login</button>.
-            </span>
-            {/* {user ? (
-              <div className="user-info">
-                <img src={user.avatar} alt={user.avatar} />
-                <span>{user.name}</span>
-              </div>
-            ) : (
-              <span>Para enviar uma pergunta,
-                <button> faça seu login</button>.
-              </span>
+            <Button type="submit">
+              Criar sala
+            </Button>
+          </form>
+          <p>Quer entrar em uma sala existente?
+            <a onClick={() => router.push('/')}>clique aqui</a>.
+          </p>
 
-            )} */}
-            <button type="submit" >Enviar pergunta</button>
-          </div>
-        </form>
-
-        <div className="question-list">
-          {/* {questions.length > 0 && questions.map(question => {
-            return (
-              <Question
-                key={question.id}
-                author={question.author}
-                content={question.content}
-                isAnswered={question.isAnswered}
-                isHighLighted={question.isHighLighted}
-              >
-                {!question.isAnswered && (
-                  <button
-                    className={`like-button ${question.likeId ? 'liked' : ''}`}
-                    type="button"
-                    aria-label="Marcar como gostei"
-                    onClick={() => handleLikeQuestion(question.id, question.likeId)}
-                  >
-                    {question.likeCount > 0 && <span>{question.likeCount}</span>}
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M7 22H4C3.46957 22 2.96086 21.7893 2.58579 21.4142C2.21071 21.0391 2 20.5304 2 20V13C2 12.4696 2.21071 11.9609 2.58579 11.5858C2.96086 11.2107 3.46957 11 4 11H7M14 9V5C14 4.20435 13.6839 3.44129 13.1213 2.87868C12.5587 2.31607 11.7956 2 11 2L7 11V22H18.28C18.7623 22.0055 19.2304 21.8364 19.5979 21.524C19.9654 21.2116 20.2077 20.7769 20.28 20.3L21.66 11.3C21.7035 11.0134 21.6842 10.7207 21.6033 10.4423C21.5225 10.1638 21.3821 9.90629 21.1919 9.68751C21.0016 9.46873 20.7661 9.29393 20.5016 9.17522C20.2371 9.0565 19.9499 8.99672 19.66 9H14Z"
-                        stroke="#737380" strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                )}
-              </Question>
-            )
-          })
-          } */}
+          <p>{user?.name}</p>
         </div>
       </main>
-    </RoomStyle>
+    </HomeStyle>
   )
 }

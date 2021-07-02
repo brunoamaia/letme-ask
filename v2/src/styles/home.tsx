@@ -50,6 +50,10 @@ export const HomeStyle = styled.div`
     align-items: stretch;
     text-align: center;
 
+    .link-home {
+      cursor: pointer;
+    }
+
     > img {
       align-self: center;
     }
@@ -103,6 +107,8 @@ export const HomeStyle = styled.div`
       margin-top: 16px;
       
       a {
+        margin-left: 5px;
+        cursor: pointer;
         color: ${({ theme }) => theme.light.txtLink};
       }
     }
