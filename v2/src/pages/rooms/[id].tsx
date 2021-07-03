@@ -6,7 +6,7 @@ import { useRoom } from '../../hooks/useRoom'
 import { MainContent } from '../../components/rooms/MainContent'
 import { Navbar } from '../../components/Navbar'
 
-import { RoomStyle } from '../../styles/rooms'
+import { RoomStyle } from '../../styles/pages/rooms'
 
 export default function Room() {
   const router = useRouter()

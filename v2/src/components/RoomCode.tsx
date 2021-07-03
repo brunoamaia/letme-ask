@@ -1,4 +1,4 @@
-import { RoomCodeStyle } from '../styles/room-code'
+import { RoomCodeStyle } from '../styles/components/room-code'
 
 import copyImg from '../images/icons/copy.svg'
 

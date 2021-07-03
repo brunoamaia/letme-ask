@@ -3,7 +3,7 @@ import router from 'next/router';
 
 import logoImg from '../images/icons/logo.svg';
 
-import { LogoHeaderStyles } from '../styles/logo-header';
+import { LogoHeaderStyles } from '../styles/components/logo-header';
 
 export function LogoHeader() {
   return (

@@ -9,7 +9,7 @@ import { database } from '../../../services/firebase';
 import illustrationImg from '../../../images/icons/illustration.svg'
 import logoImg from '../../../images/icons/logo.svg'
 
-import { HomeStyle } from '../../../styles/home'
+import { HomeStyle } from '../../../styles/pages/home'
 
 export default function NewRoom() {
   const { user } = useAuth()

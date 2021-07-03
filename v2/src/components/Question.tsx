@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-import { QuestionStyles } from '../styles/question'
+import { QuestionStyles } from '../styles/components/question'
 
 type QuestionProps = {
   author: {

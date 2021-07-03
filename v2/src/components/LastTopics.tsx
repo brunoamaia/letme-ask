@@ -1,6 +1,6 @@
 import router from 'next/router';
 
-import { LastTopicsStyles } from '../styles/last-topics'
+import { LastTopicsStyles } from '../styles/components/last-topics'
 
 type LastTopicsProps = {
   data: Array<Topics>

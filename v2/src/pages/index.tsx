@@ -11,7 +11,7 @@ import googleIconImg from '../images/icons/google-icon.svg'
 import logoImg from '../images/icons/logo.svg'
 import logIn from '../images/icons/log-in.svg'
 
-import { HomeStyle } from '../styles/home'
+import { HomeStyle } from '../styles/pages/home'
 import { LastTopics } from '../components/LastTopics'
 
 type TopicsProps = Array<Topics>

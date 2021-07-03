@@ -5,7 +5,7 @@ import { MainContent } from '../../../components/rooms/MainContent'
 import { Navbar } from '../../../components/Navbar'
 import { useRoom } from '../../../hooks/useRoom'
 
-import { RoomStyle } from '../../../styles/rooms'
+import { RoomStyle } from '../../../styles/pages/rooms'
 
 export default function AdminRoom() {
   const router = useRouter()
