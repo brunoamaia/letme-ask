@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 import { RoomCodeStyle } from '../../../styles/components/room-code'
 
 import copyImg from '../../../images/icons/copy.svg'
@@ -13,7 +15,7 @@ export function RoomCode(props: RoomCodeProps) {
   return (
     <RoomCodeStyle className="room-code" onClick={copyRoomCodeToClipboard}>
       <div>
-        <img src={copyImg} alt="Copy room code" />
+        <Image src={copyImg} alt="Copy room code" />
       </div>
       <span>Sala #{props.code}</span>
     </RoomCodeStyle>

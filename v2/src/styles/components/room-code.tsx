@@ -16,7 +16,8 @@ export const RoomCodeStyle = styled.button`
     align-items: center;
     justify-content: center;
     background-color: #835AFD;
-    padding: 0 12px;
+    padding: 5px 12px;
+    height: 100%;
   }
 
   span {
