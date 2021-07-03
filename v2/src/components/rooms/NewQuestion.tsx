@@ -2,7 +2,7 @@ import { FormEvent, useState } from "react";
 
 import { database } from "../../services/firebase";
 
-import { Button } from "../Button"
+import { Button } from "../common/Button"
 
 interface NewQuestionProps {
   roomId: string

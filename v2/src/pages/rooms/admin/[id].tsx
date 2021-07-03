@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { MainContent } from '../../../components/rooms/MainContent'
-import { Navbar } from '../../../components/Navbar'
+import { Navbar } from '../../../components/rooms/navbar/Navbar'
 import { useRoom } from '../../../hooks/useRoom'
 
 import { RoomStyle } from '../../../styles/pages/rooms'
@@ -32,7 +32,7 @@ export default function AdminRoom() {
             title={title} 
           />
         ) : (
-          <h1>Error</h1>
+          <h1>Buscando informações...</h1>
         )}
       </main>
     </RoomStyle>

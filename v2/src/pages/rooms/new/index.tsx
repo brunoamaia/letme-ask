@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image'
 
-import { Button } from '../../../components/Button';
+import { Button } from '../../../components/common/Button';
 import { useAuth } from '../../../hooks/useAuth';
 import { database } from '../../../services/firebase';
 

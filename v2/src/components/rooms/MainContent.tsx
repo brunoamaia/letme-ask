@@ -1,11 +1,11 @@
 import { useAuth } from "../../hooks/useAuth"
 
-import { NewQuestion } from '../../components/rooms/NewQuestion'
-import { LikeQuestionButton } from './LikeQuestionButton'
-import { AnsweredQuestionButton } from './AnsweredQuestionButton'
-import { HighlightQuestionButton } from './HighlightQuestionButton'
-import { DeleteQuestionButton } from './DeleteQuestionButton'
-import { Question } from '../../components/Question'
+import { AnsweredQuestionButton } from './button/AnsweredQuestionButton'
+import { DeleteQuestionButton } from './button/DeleteQuestionButton'
+import { HighlightQuestionButton } from './button/HighlightQuestionButton'
+import { LikeQuestionButton } from './button/LikeQuestionButton'
+import { NewQuestion } from './NewQuestion'
+import { ShowQuestion } from './ShowQuestion'
 
 interface MainContentProps {
   isAdmin: boolean
@@ -46,7 +46,7 @@ export function MainContent({
       <div className="question-list">
         {questions.length > 0 && questions.map(question => {
           return (
-            <Question
+            <ShowQuestion
               key={question.id}
               author={question.author}
               content={question.content}
@@ -67,7 +67,7 @@ export function MainContent({
                   )}
                 </>
               )}
-            </Question>
+            </ShowQuestion>
           )
         })
         }

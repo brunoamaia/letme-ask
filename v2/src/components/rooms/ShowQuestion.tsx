@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-import { QuestionStyles } from '../styles/components/question'
+import { QuestionStyles } from '../../styles/components/question'
 
 type QuestionProps = {
   author: {
@@ -13,7 +13,7 @@ type QuestionProps = {
   isHighLighted?: boolean
 }
 
-export function Question({
+export function ShowQuestion({
   author,
   children,
   content,

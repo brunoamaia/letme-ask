@@ -2,17 +2,17 @@ import React, { FormEvent, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
+import { LastTopics } from '../components/home/LastTopics'
 import { useAuth } from '../hooks/useAuth'
 import { useQuestions } from '../hooks/useQuestions'
 import { database } from '../services/firebase'
 
-import illustrationImg from '../images/icons/illustration.svg'
 import googleIconImg from '../images/icons/google-icon.svg'
+import illustrationImg from '../images/icons/illustration.svg'
 import logoImg from '../images/icons/logo.svg'
 import logIn from '../images/icons/log-in.svg'
 
 import { HomeStyle } from '../styles/pages/home'
-import { LastTopics } from '../components/LastTopics'
 
 type TopicsProps = Array<Topics>
 interface Topics {

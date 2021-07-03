@@ -1,4 +1,4 @@
-import { database } from "../../services/firebase"
+import { database } from "../../../services/firebase"
 
 interface HighlightButtonProps {
   question: {

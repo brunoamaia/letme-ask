@@ -3,8 +3,8 @@ import { useRouter } from 'next/router'
 import { LogoHeader } from './LogoHeader'
 import { RoomCode } from './RoomCode'
 
-import { Button } from './Button'
-import { database } from '../services/firebase'
+import { Button } from '../../common/Button'
+import { database } from '../../../services/firebase'
 
 interface NavbarProps {
   admin: boolean
