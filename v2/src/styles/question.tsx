@@ -27,6 +27,8 @@ export const QuestionStyles = styled.div`
     color: #29292E;
   }
 
+  
+
   footer {
     display: flex;
     align-items: center;
@@ -49,17 +51,31 @@ export const QuestionStyles = styled.div`
         font-size: 14px;
       }
     }
+  }
 
-    > div {
-      display: flex;
-      gap: 16px;
-    }
+  .btn-container {
+    display: flex;
+    column-gap: 10px;
+    align-items: flex-start;
+    justify-content: center;
 
     button {
       border: 0;
       background-color: transparent;
       cursor: pointer;
       transition: filter 0.2s;
+
+      &.answer-button {
+        margin-top: -2px;
+      }
+
+      &.highLight-button {
+        &.highLighted {
+          svg {
+            stroke: #00B060;
+          }
+        }
+      }
 
       &.like-button {
         display: flex;
@@ -77,7 +93,19 @@ export const QuestionStyles = styled.div`
       }
 
       &:hover {
-        filter: brightness(0.2);
+        filter: brightness(0.8);
+        /*
+        svg {
+          stroke: #835AFD;
+        }
+        svg circle {
+          stroke: #835AFD;
+        }
+        svg path {
+          stroke: #835AFD;
+        }
+        */
+        
       }
     }
   }

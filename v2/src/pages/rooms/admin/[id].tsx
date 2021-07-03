@@ -1,34 +1,32 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
-//import { useAuth } from '../../hooks/useAuth'
-import { useRoom } from '../../hooks/useRoom'
-import { MainContent } from '../../components/rooms/MainContent'
-import { Navbar } from '../../components/Navbar'
+import { MainContent } from '../../../components/rooms/MainContent'
+import { Navbar } from '../../../components/Navbar'
+import { useRoom } from '../../../hooks/useRoom'
 
-import { RoomStyle } from '../../styles/rooms'
+import { RoomStyle } from '../../../styles/rooms'
 
-export default function Room() {
+export default function AdminRoom() {
   const router = useRouter()
-  const [roomId, setRoomId] = useState<string>('')
 
+  const [roomId, setRoomId] = useState<string>('')
   const queryKey = 'id'
   const queryValue = router.query[queryKey] as string
   useEffect(() => {
     setRoomId(queryValue)
   }, [queryValue])
 
-  // const { user } = useAuth()
   const { questions, title } = useRoom(roomId)
 
   return (
-    <RoomStyle>
-      <Navbar admin={false} roomId={roomId}/>
+    <RoomStyle id="page-room">
+      <Navbar admin={true} roomId={roomId}/>
 
       <main>
-        {questions != null ? (
+      {questions != null ? (
           <MainContent 
-            isAdmin={false}
+            isAdmin={true}
             questions={questions} 
             roomId={roomId} 
             title={title} 

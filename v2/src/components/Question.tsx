@@ -33,7 +33,7 @@ export function Question({
           <span>{author.name}</span>
         </div>
 
-        <div>{children}</div>
+        <div className="btn-container">{children}</div>
       </footer>
     </QuestionStyles>
   )

@@ -1,10 +1,14 @@
 import { useAuth } from "../../hooks/useAuth"
 
 import { NewQuestion } from '../../components/rooms/NewQuestion'
-import { LikeButton } from '../../components/rooms/LikeButton'
+import { LikeQuestionButton } from './LikeQuestionButton'
+import { AnsweredQuestionButton } from './AnsweredQuestionButton'
+import { HighlightQuestionButton } from './HighlightQuestionButton'
+import { DeleteQuestionButton } from './DeleteQuestionButton'
 import { Question } from '../../components/Question'
 
 interface MainContentProps {
+  isAdmin: boolean
   questions: Array<{
     author: {
       name: string
@@ -21,7 +25,12 @@ interface MainContentProps {
   title: string
 }
 
-export function MainContent({ questions, roomId, title }: MainContentProps) {
+export function MainContent({ 
+  isAdmin, 
+  questions, 
+  roomId, 
+  title 
+}: MainContentProps) {
   const { user } = useAuth()
 
   return (
@@ -45,7 +54,18 @@ export function MainContent({ questions, roomId, title }: MainContentProps) {
               isHighLighted={question.isHighLighted}
             >
               {!question.isAnswered && (
-                <LikeButton question={question} roomId={roomId} user={user} />
+                <>
+                  {!isAdmin ? (
+                    <LikeQuestionButton question={question} roomId={roomId} user={user} />
+                    ):(
+                      <>
+                        <AnsweredQuestionButton question={question} roomId={roomId} />
+                        <LikeQuestionButton question={question} roomId={roomId} user={user} />
+                        <HighlightQuestionButton question={question} roomId={roomId} />
+                        <DeleteQuestionButton question={question} roomId={roomId} />
+                      </>
+                  )}
+                </>
               )}
             </Question>
           )
