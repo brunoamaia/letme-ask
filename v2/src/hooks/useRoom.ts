@@ -16,6 +16,13 @@ interface QuestionProps {
   likeId: string | undefined
 }
 
+type FirebaseData = {
+  authorId: string
+  questions: FirebaseQuestions
+  closedAt?: string
+  title: string
+} | null
+
 type FirebaseQuestions = Record<string, {
   author: {
     name: string
@@ -33,16 +40,16 @@ export function useRoom(roomId: string) {
   const { user } = useAuth()
   const [questions, setQuestions] = useState<QuestionProps[] | null>(null)
   const [title, setTitle] = useState('')
-  const [authorId, setAuthorId] = useState(null)
+  const [authorId, setAuthorId] = useState<string | null>(null)
 
   useEffect(() => {
     const roomRef = database.ref(`rooms/${roomId}`)
 
     roomRef.on('value', room => {
-      const databaseRoom = room.val()
+      const databaseRoom: FirebaseData = room.val()
 
-      if (databaseRoom == null) {
-        setTitle('Sala inválida')
+      if (databaseRoom == null || databaseRoom.closedAt != null) {
+        setTitle('NotHasContentInThisPage')
         setQuestions(null)
       } else {
         const firebaseQuestion: FirebaseQuestions = databaseRoom.questions ?? {}

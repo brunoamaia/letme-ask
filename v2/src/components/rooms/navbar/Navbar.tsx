@@ -17,8 +17,6 @@ export function Navbar({ admin = false, roomId }: NavbarProps) {
     await database.ref(`rooms/${roomId}`).update({
       closedAt: new Date()
     })
-    console.log('UÉ')
-
     router.push('/')
   }
 
