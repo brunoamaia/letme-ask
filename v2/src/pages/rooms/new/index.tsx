@@ -2,14 +2,14 @@ import React, { FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image'
 
+import { IlustrationAside } from '../../../components/home/IlustrationAside';
 import { Button } from '../../../components/common/Button';
 import { useAuth } from '../../../hooks/useAuth';
 import { database } from '../../../services/firebase';
 
-import illustrationImg from '../../../images/icons/illustration.svg'
 import logoImg from '../../../images/icons/logo.svg'
 
-import { HomeStyle } from '../../../styles/pages/home'
+import { NewPageStyle } from '../../../styles/pages/new'
 
 export default function NewRoom() {
   const { user } = useAuth()
@@ -36,15 +36,8 @@ export default function NewRoom() {
   }
 
   return (
-    <HomeStyle id="page-auth">
-      <aside>
-        <Image 
-          src={illustrationImg} 
-          alt="Ilustração simbolizando perguntas e respostas"
-        />
-        <strong>Crie salas de Q&amp;A ao-vivo</strong>
-        <p>Tire as dpuvidas sa sua audiência em tempo-real</p>
-      </aside>
+    <NewPageStyle id="page-auth">
+      <IlustrationAside />
 
       <main>
         <div className="main-content">
@@ -73,6 +66,6 @@ export default function NewRoom() {
           <p>{user?.name}</p>
         </div>
       </main>
-    </HomeStyle>
+    </NewPageStyle>
   )
 }
