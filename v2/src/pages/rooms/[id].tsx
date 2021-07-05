@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { ErrorPage } from '../../components/common/ErrorPage'
+import { LoadingData } from '../../components/common/LoadingData'
 import { ChangeMode } from '../../components/rooms/ChangeMode'
 import { MainContent } from '../../components/rooms/MainContent'
 import { Navbar } from '../../components/rooms/navbar/Navbar'
@@ -58,7 +59,7 @@ export default function Room() {
                 title={title}
               />
             ) : (
-              <h1>Buscando informações...</h1>
+              <LoadingData />
             )}
           </>
         )}
