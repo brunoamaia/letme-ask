@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 
 import { database } from "../../services/firebase";
@@ -16,6 +17,7 @@ type User = {
 }
 
 export function NewQuestion({ roomId, user }: NewQuestionProps) {
+  const router = useRouter()
   const [newQuestion, setNewQuestion] = useState('');
 
   async function handleSendQuestion(event: FormEvent) {
@@ -57,7 +59,7 @@ export function NewQuestion({ roomId, user }: NewQuestionProps) {
           </div>
         ) : (
           <span>Para enviar uma pergunta,
-            <button> faça seu login</button>.
+            <button onClick={() => router.push('/')}> faça seu login</button>.
           </span>
 
         )}

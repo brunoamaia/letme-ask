@@ -33,6 +33,11 @@ export const RoomStyle = styled.div`
     max-width: 800px;
     margin: 0 auto;
 
+    .not-sign {
+      margin-top: 20px;
+      color: ${({ theme }) => theme.light.btnBgGoogle}
+    }
+
     .room-title {
       display: flex;
       align-items: center;
@@ -99,7 +104,7 @@ export const RoomStyle = styled.div`
           button {
             background-color: transparent;
             border: 0;
-            color: ${({ theme }) => theme.light.btnBgPrimary};
+            color: ${({ theme }) => theme.light.txtLink};
             text-decoration: underline;
             font-size: 14px;
             font-weight: 500;

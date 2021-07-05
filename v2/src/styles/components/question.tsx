@@ -63,7 +63,7 @@ export const QuestionStyles = styled.div`
       border: 0;
       background-color: transparent;
       cursor: pointer;
-      transition: filter 0.2s;
+      transition: 0.2s;
 
       &.answer-button {
         margin-top: -2px;
@@ -106,6 +106,13 @@ export const QuestionStyles = styled.div`
         }
         */
         
+      }
+
+      &.not-habilited {
+        cursor: not-allowed;
+        svg path {
+          filter: brightness(1.5);
+        }
       }
     }
   }
