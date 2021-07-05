@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app'
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 
 import { AuthContextProvider } from '../contexts/AuthContext'
 
@@ -9,21 +9,7 @@ import colors from '../styles/theme.json'
 
 const themes = colors
 
-const GlobalStyle = createGlobalStyle`
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  body {
-    background-color: ${themes.light.bgPrimary};
-  }
-
-  body, input, button, textarea {
-    font: 400 16px 'Roboto', sans-serif;
-  }
-`;
+import { GlogalStyles } from '../styles/globalStyles'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -60,7 +46,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <ThemeProvider theme={themes}>
         <AuthContextProvider>
-          <GlobalStyle />
+          <GlogalStyles />
           <Component {...pageProps} />
         </AuthContextProvider>
       </ThemeProvider>
