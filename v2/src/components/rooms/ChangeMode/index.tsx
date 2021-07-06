@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import {ChangeModeStyles} from '../../styles/components/rooms/change-mode'
+import {ChangeModeStyles} from './styles'
 
 interface ChangeModeProps {
   isAdminView: boolean;

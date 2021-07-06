@@ -1,9 +1,11 @@
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 
-import { database } from "../../services/firebase";
+import { database } from "../../../services/firebase";
 
-import { Button } from "../common/Button"
+import { Button } from "../../common/Button"
+
+import { CreateNewQuestionStyles } from './styles'
 
 interface NewQuestionProps {
   roomId: string
@@ -44,7 +46,7 @@ export function NewQuestion({ roomId, user }: NewQuestionProps) {
   }
 
   return (
-    <form onSubmit={handleSendQuestion}>
+    <CreateNewQuestionStyles onSubmit={handleSendQuestion}>
       <textarea
         placeholder="o que você quer perguntar?"
         onChange={event => setNewQuestion(event.target.value)}
@@ -65,6 +67,6 @@ export function NewQuestion({ roomId, user }: NewQuestionProps) {
         )}
         <Button type="submit" disabled={!user}>Enviar pergunta</Button>
       </div>
-    </form>
+    </CreateNewQuestionStyles>
   )
 }

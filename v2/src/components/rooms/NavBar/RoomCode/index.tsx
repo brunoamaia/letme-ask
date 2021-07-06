@@ -1,8 +1,8 @@
 import Image from 'next/image'
 
-import { RoomCodeStyle } from '../../../styles/components/room-code'
+import { RoomCodeStyle } from './styles'
 
-import copyImg from '../../../images/icons/copy.svg'
+import copyImg from '../../../../images/icons/copy.svg'
 
 type RoomCodeProps = {
   code: string

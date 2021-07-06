@@ -6,6 +6,8 @@ import { RoomCode } from './RoomCode'
 import { Button } from '../../common/Button'
 import { database } from '../../../services/firebase'
 
+import { NavBarStyles } from './styles'
+
 interface NavbarProps {
   admin: boolean
   roomId: string
@@ -22,19 +24,23 @@ export function Navbar({ admin = false, roomId }: NavbarProps) {
 
   return (
     <header>
-      <div className="content">
+      <NavBarStyles>
         <LogoHeader />
         <>
           {admin ? (
             <div>
               <RoomCode code={roomId} />
-              <Button isOutlined onClick={handleDeleteRoom}>Encerrar Sala</Button>
+              <Button 
+                isOutlined onClick={handleDeleteRoom} className="close-room"
+              >
+                Encerrar Sala
+              </Button>
             </div>
           ) : (
             <RoomCode code={roomId} />
           )}
         </>
-      </div>
+      </NavBarStyles>
     </header>
   )
 }

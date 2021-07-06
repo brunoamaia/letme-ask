@@ -5,7 +5,7 @@ import { ErrorPage } from '../../../components/common/ErrorPage'
 import { LoadingData } from '../../../components/common/LoadingData'
 import { ChangeMode } from '../../../components/rooms/ChangeMode'
 import { MainContent } from '../../../components/rooms/MainContent'
-import { Navbar } from '../../../components/rooms/navbar/Navbar'
+import { Navbar } from '../../../components/rooms/NavBar'
 import { useAuth } from '../../../hooks/useAuth'
 import { useRoom } from '../../../hooks/useRoom'
 
