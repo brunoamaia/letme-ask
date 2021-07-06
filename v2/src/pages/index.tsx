@@ -1,9 +1,9 @@
 import { IlustrationAside } from '../components/home/IlustrationAside'
 
+import { LogoToHome } from '../components/common/LogoToHome'
 import { FromSearchRoom } from '../components/home/FormSearchRoom'
 import { LastTopics } from '../components/home/LastTopics'
 import { LoginButton } from '../components/home/LoginButton'
-import { LogoToHome } from '../components/home/LogoToHome'
 
 import { HomeStyle } from '../styles/pages/home'
 
